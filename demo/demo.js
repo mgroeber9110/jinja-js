@@ -3,6 +3,7 @@ jQuery(function($) {
   "use strict";
   var $jinja = $('#jinja');
   var $output = $('#output');
+  var $error = $('#error');
   var includeRuntime = false;
   $('#include-runtime').change(function() {
     includeRuntime = $(this).is(':checked');
@@ -30,6 +31,8 @@ jQuery(function($) {
     lineNumbers: true,
     mode: {name: "javascript", htmlMode: true}
   });
+  
+  var error_panel = $error.get(0);
 
   var timeout;
   input.on('change', function(instance, change) {
@@ -44,8 +47,9 @@ jQuery(function($) {
     var src = input.getValue();
     try {
       var fn = jinja.compile(src, {runtime: includeRuntime}).render;
+      error_panel.textContent = ""
     } catch(e) {
-      //todo: update error panel
+      error_panel.textContent = e;
       return;
     }
     src = fn.toString();
