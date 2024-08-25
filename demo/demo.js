@@ -22,6 +22,7 @@ jQuery(function($) {
   var input = CodeMirror.fromTextArea($jinja.get(0), {
     tabSize: 2,
     lineNumbers: true,
+    lineWrapping: true,
     autofocus: true,
     mode: {name: "jinja2", htmlMode: true}
   });
